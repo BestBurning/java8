@@ -2,6 +2,7 @@ package com.diyishuai.lambda;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Bruce on 16/8/8.
@@ -37,7 +38,20 @@ public class LambdaTest {
                 .skip(2)
                 .forEach(str -> System.out.println(str));
         System.out.println("===========");
+        distinctPrimary("12","23","12","23");
 
+        System.out.println("===========");
 
     }
+
+    public static void distinctPrimary(String...numbers) {
+        List<String> strings = Arrays.asList(numbers);
+        List<Integer> collect = strings.parallelStream()
+                .map(e -> new Integer(e))
+//              .filter(e -> Primes.isPrime(e))
+                .distinct()
+                .collect(Collectors.toList());
+        System.out.println(collect);
+    }
+
 }
